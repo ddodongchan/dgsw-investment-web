@@ -1,5 +1,12 @@
+import Header from "@/components/header/index";
+
 const Main = () => {
-    return <h1>Main Page</h1>;
-  };
-  
-  export default Main;
+  return (
+    <div>
+      <Header />
+      <h1>Main Page</h1>
+    </div>
+  );
+};
+
+export default Main;
