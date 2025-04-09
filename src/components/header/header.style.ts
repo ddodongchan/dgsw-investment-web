@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 16px 72px;
-  background-color: #eef5ff;
+  /* background-color: #eef5ff; */
 
   @media (max-width: 768px) {
     padding: 16px 24px;
