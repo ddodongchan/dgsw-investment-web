@@ -14,6 +14,13 @@ export const HeaderContainer = styled.header`
   }
 `;
 
+export const SidebarWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+`
+
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
@@ -61,3 +68,13 @@ export const MenuIcon = styled(RxHamburgerMenu)`
   color: #0A467D;
   cursor: pointer;
 `;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2); 
+  z-index: 999; 
+`

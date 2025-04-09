@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "../../assets/img/logo.svg";
 
 import * as S from "./header.style";
+import Sidebar from "../sidebar/index";
 
 export default function Header() {
   const placeholders = [
@@ -17,6 +18,7 @@ export default function Header() {
   ];
 
   const [placeholder, setPlaceholder] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * placeholders.length);
@@ -24,15 +26,26 @@ export default function Header() {
   }, []);
 
   return (
-    <S.HeaderContainer>
-      <S.LogoContainer>
-        <Image src={logo} alt="Logo" width={170} height={40} />
-      </S.LogoContainer>
-      <S.SearchContainer>
-        <S.SearchInput type="text" placeholder={placeholder} />
-        <S.SearchIcon />
-      </S.SearchContainer>
-      <S.MenuIcon />
-    </S.HeaderContainer>
+    <>
+      <S.HeaderContainer>
+        <S.LogoContainer>
+          <Image src={logo} alt="Logo" width={170} height={40} />
+        </S.LogoContainer>
+        <S.SearchContainer>
+          <S.SearchInput type="text" placeholder={placeholder} />
+          <S.SearchIcon />
+        </S.SearchContainer>
+        <S.MenuIcon onClick={() => setIsSidebarOpen((prev) => !prev)} />
+      </S.HeaderContainer>
+
+      {isSidebarOpen && (
+        <>
+            <S.Overlay onClick={() => setIsSidebarOpen(false)} /> 
+            <S.SidebarWrapper>
+            <Sidebar />
+            </S.SidebarWrapper>
+        </>
+        )}
+    </>
   );
 }
