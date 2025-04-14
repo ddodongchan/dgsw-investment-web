@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import ArticleCard from "@/components/articlecard/index";
-import type { Article } from "@/components/articlecard/index"; // 🔧 type-only import
+import type { Article } from "@/components/articlecard/index";
 import * as S from "./article.style";
 
 const dummyArticle: Article = {
@@ -21,16 +21,20 @@ const Article = () => {
         <S.ContentWrapper>
           <S.Section>
             <S.SectionTitle>📌 주요 뉴스</S.SectionTitle>
-            <S.Grid>
-              {[1, 2, 3].map((_, i) => (
-                <ArticleCard key={`main-${i}`} article={dummyArticle} />
-              ))}
+            <S.Grid type="main">
+              <ArticleCard article={dummyArticle} />
+
+              <S.VerticalCardList>
+                {[1, 2, 3].map((_, i) => (
+                  <ArticleCard key={`main-${i}`} article={dummyArticle} />
+                ))}
+              </S.VerticalCardList>
             </S.Grid>
           </S.Section>
 
           <S.Section>
-            <S.SectionTitle>🆕 최신 뉴스</S.SectionTitle>
-            <S.Grid>
+            <S.SectionTitle>📢 최신 뉴스</S.SectionTitle>
+            <S.Grid type="latest">
               {[1, 2, 3].map((_, i) => (
                 <ArticleCard key={`latest-${i}`} article={dummyArticle} />
               ))}

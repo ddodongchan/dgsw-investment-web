@@ -4,10 +4,10 @@ export const Card = styled.div`
   background-color: white;
   border-radius: 16px;
   padding: 16px;
-  margin-bottom: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
   cursor: pointer;
+  height: 100%;
 
   &:hover {
     transform: translateY(-4px);
