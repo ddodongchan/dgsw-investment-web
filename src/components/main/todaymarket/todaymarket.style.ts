@@ -8,8 +8,8 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h2`
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 800;
   margin-bottom: 12px;
 `
 
