@@ -18,6 +18,23 @@ export const Title = styled.h2`
   margin-bottom: 16px;
 `
 
+export const Tabs = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+`
+
+export const Tab = styled.button<{ active?: boolean }>`
+  background-color: ${({ active }) => (active ? "#254ACA" : "#f1f1f1")};
+  color: ${({ active }) => (active ? "#fff" : "#333")};
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 6px 17px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 600;
+`
+
 export const StockList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -43,4 +60,10 @@ export const StockChange = styled.span`
   &.down {
     color: #2196f3;
   }
+`
+
+export const StockPrice = styled.span`
+  width: 50px;
+  text-align: right;
+  color: #333;
 `

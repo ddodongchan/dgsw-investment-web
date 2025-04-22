@@ -5,9 +5,9 @@ const MainNews = () => {
     <S.Container>
       <S.Title>🗞️ 주요 뉴스</S.Title>
       <S.NewsList>
-        <S.NewsItem>1. 삼성전자, 역대 최고 실적 달성</S.NewsItem>
-        <S.NewsItem>2. 코스피 2,600 돌파…외국인 매수세 주목</S.NewsItem>
-        <S.NewsItem>3. 애플, AI 칩셋 개발 본격화</S.NewsItem>
+        <S.NewsItem>[노영재] 엄청난엄청난엄청난 회사 입사 성공함</S.NewsItem>
+        <S.NewsItem>[노일재] 본인이 임베디드가 되겠다고 선언해...일파만파</S.NewsItem>
+        <S.NewsItem>[노이재] 노이재, 이렇게 살다가 노이로제</S.NewsItem>
       </S.NewsList>
     </S.Container>
   )

@@ -25,6 +25,7 @@ export const Tab = styled.button<{ active?: boolean }>`
   border-radius: 6px;
   font-weight: ${({ active }) => (active ? 700 : 400)};
   cursor: pointer;
+  font-weight: 600;
 `
 
 export const Row = styled.div`

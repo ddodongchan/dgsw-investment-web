@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import * as S from "./todaymarket.style"
 
 const dummyMarkets = [
-  { label: "코스피", value: "2,500.00 (+1.25%)", up: true },
-  { label: "코스닥", value: "850.35 (-0.62%)", up: false },
-  { label: "다우", value: "34,567.89 (+0.89%)", up: true },
-  { label: "나스닥", value: "13,123.45 (-0.45%)", up: false },
-  { label: "S&P500", value: "4,321.98 (+0.15%)", up: true },
-  { label: "니케이", value: "32,456.78 (-1.12%)", up: false },
-  { label: "상해종합", value: "3,045.22 (+0.33%)", up: true },
+  { label: "노영재", value: "2,500.00 (+1.25%)", up: true },
+  { label: "노일재", value: "850.35 (-0.62%)", up: false },
+  { label: "노삼재", value: "34,567.89 (+0.89%)", up: true },
+  { label: "노사재", value: "13,123.45 (-0.45%)", up: false },
+  { label: "노오재", value: "4,321.98 (+0.15%)", up: true },
+  { label: "노육재", value: "32,456.78 (-1.12%)", up: false },
+  { label: "노칠재", value: "3,045.22 (+0.33%)", up: true },
 ]
 
 const TodayMarket = () => {

@@ -25,7 +25,8 @@ export const NewsList = styled.ul`
   flex-grow: 1;
 `
 
-export const NewsItem = styled.li`
-  font-size: 15px;
+export const NewsItem = styled.div`
+  font-size: 16px;
   color: #333;
+  font-weight: 600;
 `
