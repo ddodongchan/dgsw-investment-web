@@ -6,7 +6,7 @@ import StockChart from "@/components/main/stockchart"
 import OrderSection from "@/components/main/ordersection/index"
 import TopStock from "@/components/main/topstock/index"
 
-import * as S from './main.style'
+import * as S from '../../styles/main.style'
 
 const Main = () => {
   return (

@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import ArticleCard from "@/components/articlecard/index";
 import type { Article } from "@/components/articlecard/index";
-import * as S from "./article.style";
+import * as S from "../../styles/article.style";
 
 const dummyArticle: Article = {
   title: "[노영재] 엄청나게 큰회사합격 ㄷㄷㄷㄷ",

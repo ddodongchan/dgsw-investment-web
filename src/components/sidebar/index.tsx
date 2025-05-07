@@ -12,7 +12,7 @@ const Sidebar = () => {
   const menuItems = [
     { label: '홈', icon: <Home />, path: '/main' },
     { label: '뉴스', icon: <FileText />, path: '/article' },
-    { label: '내 주식', icon: <BarChart2 />, path: '/mypage' },
+    { label: '내 주식', icon: <BarChart2 />, path: '/mystock' },
   ]
 
   const [selected, setSelected] = useState('')
@@ -30,7 +30,7 @@ const Sidebar = () => {
   }
 
   const handleUserClick = () => {
-    setSelected('내 주식')
+    setSelected('내 정보')
     router.push('/mypage')
   }
 

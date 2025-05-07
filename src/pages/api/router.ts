@@ -7,9 +7,10 @@ const useAppRouter = () => {
     goHome: () => router.push("/"),
     goToAbout: () => router.push("/main"),
     goToArticle: () => router.push("/article"),
-    goToMyPage: () => router.push("/mypage"),
+    goToMyStock: () => router.push("/mystock"),
     goToProduct: (id: string) => router.push(`/product/${id}`),
     goToWrite: () => router.push("/write"),
+    goToMyPage: () => router.push("/mypage"),
     goBack: () => router.back(),
     reloadPage: () => router.reload(),
   };

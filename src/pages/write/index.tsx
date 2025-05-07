@@ -1,4 +1,4 @@
-import * as S from './write.style';
+import * as S from '../../styles/write.style';
 import Header from '@/components/header';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -6,10 +6,9 @@ import ReactMarkdown from 'react-markdown';
 import {
   Panel,
   PanelGroup,
-  PanelResizeHandle,
 } from 'react-resizable-panels';
 
-export default function Home() {
+function Write() {
   const [markdown, setMarkdown] = useState('');
 
   const handleRegisterClick = () => {
@@ -54,3 +53,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Write; 

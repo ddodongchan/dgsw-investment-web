@@ -1,11 +1,5 @@
 import styled from 'styled-components';
-
-import {
-    Panel,
-    PanelGroup,
-    PanelResizeHandle,
-  } from 'react-resizable-panels';
-
+import { Panel, PanelResizeHandle } from 'react-resizable-panels';
 
 
 export const Wrapper = styled.div`
