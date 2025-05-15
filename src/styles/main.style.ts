@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   min-height: 100vh;
+  /* height: calc(100vh - 40px); */
   display: flex;
   flex-direction: column;
   padding-bottom: 25px;
@@ -16,7 +17,7 @@ export const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 2.5fr 1fr;
   gap: 1rem;
-  padding: 1rem 5vw;
+  padding: 0% 5vw;
   flex-grow: 1;
   align-items: stretch;
 `

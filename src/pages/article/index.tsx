@@ -21,15 +21,21 @@ const Article = () => {
         <S.ContentWrapper>
           <S.Section>
             <S.SectionTitle>📌 주요 뉴스</S.SectionTitle>
-            <S.Grid type="main">
+            <S.Grid type="main" style={{ height: "400px" }}>
+            <div style={{ flex: 1 }}>
               <ArticleCard article={dummyArticle} />
+            </div>
 
-              <S.VerticalCardList>
-                {[1, 2, 3].map((_, i) => (
-                  <ArticleCard key={`main-${i}`} article={dummyArticle} />
-                ))}
-              </S.VerticalCardList>
-            </S.Grid>
+            <S.VerticalCardList>
+            {[1, 2, 3].map((_, i) => (
+              <div
+                key={i}
+                style={{ overflow: "hidden"}} >
+                <ArticleCard article={dummyArticle} />
+              </div>
+            ))}
+          </S.VerticalCardList>
+          </S.Grid>
           </S.Section>
 
           <S.Section>

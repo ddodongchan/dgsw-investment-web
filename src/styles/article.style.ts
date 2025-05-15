@@ -25,34 +25,40 @@ export const SectionTitle = styled.h2`
 `;
 
 export const Grid = styled.div<{ type?: "main" | "latest" }>`
-  display: grid;
-  gap: 20px;
-
   ${({ type }) =>
     type === "main"
       ? `
-    grid-template-columns: 2fr 1fr;
-    align-items: stretch; 
-    min-height: 220px; 
+    display: flex;
+    gap: 20px;
+    height: 100%; // 중요!
+    align-items: stretch;
 
     @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+      flex-direction: column;
     }
   `
       : `
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
   `}
 `;
-
 export const VerticalCardList = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  height: 100%;
+  justify-content: space-between;
+
+  & > * {
+    flex: 1;
+  }
 
   & > *:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 `;
