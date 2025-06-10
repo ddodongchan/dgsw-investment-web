@@ -1,19 +1,71 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/header";
 import ArticleCard from "@/components/articlecard/index";
-import type { Article } from "@/components/articlecard/index";
 import * as S from "../../styles/article.style";
 
-const dummyArticle: Article = {
-  title: "[노영재] 엄청나게 큰회사합격 ㄷㄷㄷㄷ",
-  summary:
-    "최상목 경제부총리 겸 기획재정부 장관은 9일 미국이 상호관세 부과와 관련해 “전례없는 통상 위기를 맞고 있다”면서 “비상상황에 맞는 과감한 지원을...",
-  date: "2024.03.11",
-  author: "노상재 기자",
-  rate: "0.3445",
-  price: "2,300",
-};
+const API = process.env.NEXT_PUBLIC_API || "http://localhost:3000";
 
-const Article = () => {
+export interface Article {
+  title: string;
+  summary: string;
+  date: string;
+  author: string;
+  rate: string;
+  price: string;
+  context?: string;
+}
+
+const ArticlePage = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const token = localStorage.getItem("access_token");
+
+        const res = await fetch(`${API}/api/news/all?page=1&size=10`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const raw = await res.text();
+        const parsed = JSON.parse(raw);
+
+        console.log("API 응답 데이터:", parsed);
+
+        const dataArray = parsed.data;
+
+        if (!Array.isArray(dataArray)) {
+          console.error("API 응답 data가 배열이 아닙니다:", dataArray);
+          return;
+        }
+
+        const articleList: Article[] = dataArray.map((item: any) => ({
+          title: item.title || "",
+          summary: item.context || "",
+          date: item.date || "",
+          author: item.user_name || "",
+          rate: item.rate || "0",
+          price: item.price || "0",
+          context: item.context || "",
+        }));
+
+        setArticles(articleList);
+      } catch (error) {
+        console.error("뉴스 로딩 실패:", error);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
   return (
     <>
       <Header />
@@ -22,27 +74,25 @@ const Article = () => {
           <S.Section>
             <S.SectionTitle>📌 주요 뉴스</S.SectionTitle>
             <S.Grid type="main" style={{ height: "400px" }}>
-            <div style={{ flex: 1 }}>
-              <ArticleCard article={dummyArticle} />
-            </div>
-
-            <S.VerticalCardList>
-            {[1, 2, 3].map((_, i) => (
-              <div
-                key={i}
-                style={{ overflow: "hidden"}} >
-                <ArticleCard article={dummyArticle} />
+              <div style={{ flex: 1 }}>
+                {articles[0] && <ArticleCard article={articles[0]} />}
               </div>
-            ))}
-          </S.VerticalCardList>
-          </S.Grid>
+
+              <S.VerticalCardList>
+                {articles.slice(1, 4).map((article, i) => (
+                  <div key={i} style={{ overflow: "hidden" }}>
+                    <ArticleCard article={article} />
+                  </div>
+                ))}
+              </S.VerticalCardList>
+            </S.Grid>
           </S.Section>
 
           <S.Section>
             <S.SectionTitle>📢 최신 뉴스</S.SectionTitle>
             <S.Grid type="latest">
-              {[1, 2, 3].map((_, i) => (
-                <ArticleCard key={`latest-${i}`} article={dummyArticle} />
+              {articles.slice(4, 7).map((article, i) => (
+                <ArticleCard key={`latest-${i}`} article={article} />
               ))}
             </S.Grid>
           </S.Section>
@@ -52,4 +102,4 @@ const Article = () => {
   );
 };
 
-export default Article;
+export default ArticlePage;

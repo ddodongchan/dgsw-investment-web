@@ -11,10 +11,20 @@ export const Wrapper = styled.div`
   height: calc(100vh - 120px); 
 `;
 
+
 export const Header = styled.h1`
   color: #003e6b;
   font-size: 1.5rem;
   font-weight: bold;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 `;
 
 export const Title = styled.h2`

@@ -2,7 +2,6 @@ import * as S from '../../styles/write.style';
 import Header from '@/components/header';
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-
 import {
   Panel,
   PanelGroup,
@@ -10,13 +9,47 @@ import {
 
 function Write() {
   const [markdown, setMarkdown] = useState('');
+  const [title, setTitle] = useState('');
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = async () => {
+    const accessToken =
+      typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+
+    if (!accessToken) {
+      alert("로그인이 필요합니다. 로그인 후 이용해주세요.");
+      return;
+    }
+
     const confirmMessage = window.confirm("등록할까요말까요???");
-    if (confirmMessage) {
-      alert("등록되었습니다!");
-    } else {
+
+    if (!confirmMessage) {
       alert("등록이 취소되었습니다.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/news/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          title: title,
+          context: markdown,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      alert("등록되었습니다!");
+      setTitle('');
+      setMarkdown('');
+    } catch (error) {
+      console.error('등록 중 오류 발생:', error);
+      alert("등록에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -29,12 +62,23 @@ function Write() {
           <Panel defaultSize={60} minSize={20}>
             <S.PanelWrapper>
               <S.ArticleTitle>📝 기사 작성</S.ArticleTitle>
+
+              <S.Input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="기사 제목을 입력하세요"
+              />
+
               <S.TextArea
                 value={markdown}
                 onChange={(e) => setMarkdown(e.target.value)}
                 placeholder="마크다운 형식으로 기사를 작성해보세요!"
               />
-              <S.RegisterButton onClick={handleRegisterClick}>등록하기</S.RegisterButton>
+
+              <S.RegisterButton onClick={handleRegisterClick}>
+                등록하기
+              </S.RegisterButton>
             </S.PanelWrapper>
           </Panel>
 
@@ -54,4 +98,4 @@ function Write() {
   );
 }
 
-export default Write; 
+export default Write;
