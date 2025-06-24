@@ -125,7 +125,10 @@ const StockChart = () => {
     setIsDropdownOpen(false);
   };
 
+  // 중복 실행 방지용 loading 체크 포함한 함수로 수정
   const handleSearchOrCreate = async () => {
+    if (loading) return; // 요청 중이면 중복 실행 방지
+
     const trimmed = searchInput.trim();
     if (!trimmed) return;
 
@@ -138,6 +141,7 @@ const StockChart = () => {
     }
 
     try {
+      setLoading(true);
       const response = await axios.post(
         `${API_BASE}/api/stocks/`,
         {
@@ -154,6 +158,8 @@ const StockChart = () => {
       onSelectStock(newStock);
     } catch {
       setError("⚠️ 주식을 생성하지 못했어요.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -183,7 +189,10 @@ const StockChart = () => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearchOrCreate();
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSearchOrCreate();
+              }
             }}
             placeholder="주식명을 입력하세요"
             style={{ flex: 1 }}
