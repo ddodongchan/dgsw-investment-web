@@ -1,28 +1,30 @@
-import { useState } from "react";
 import * as S from './mystocklist.style'
 
-const TransactionList = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+type Props = {
+  data: {
+    name: string;
+    price: string;
+  }[];
+  activeIndex: number;
+  onClickItem: (index: number) => void;
+};
 
-  const handleItemClick = (index: number) => {
-    setActiveIndex(index === activeIndex ? null : index); // 클릭 시 토글
-  };
-
+const MyStockList = ({ data, activeIndex, onClickItem }: Props) => {
   return (
     <S.Wrapper>
-      {Array.from({ length: 10 }).map((_, idx) => (
+      {data.map((item, idx) => (
         <S.TransactionItem
           key={idx}
           active={activeIndex === idx}
-          onClick={() => handleItemClick(idx)}
+          onClick={() => onClickItem(idx)}
         >
           <S.StockDetails>
             <S.StockTitleWrapper>
-              <S.StockTitle>노영재</S.StockTitle>
-              <S.StockTitle>22,222뇽</S.StockTitle>
+              <S.StockTitle>{item.name}</S.StockTitle>
+              <S.StockTitle>{item.price}</S.StockTitle>
             </S.StockTitleWrapper>
             <S.SubDetailWrapper>
-              <S.StockWeek>2주</S.StockWeek>
+              <S.StockWeek>{idx + 1}주</S.StockWeek>
               <S.SubDetail>-22,222(50%)</S.SubDetail>
             </S.SubDetailWrapper>
           </S.StockDetails>
@@ -32,4 +34,4 @@ const TransactionList = () => {
   );
 };
 
-export default TransactionList;
+export default MyStockList;

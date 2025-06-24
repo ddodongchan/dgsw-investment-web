@@ -1,16 +1,27 @@
-import * as S from "./mainnews.style"
+import * as S from "./mainnews.style";
+import { useArticles } from "@/hooks/useArticles";
 
 const MainNews = () => {
+  const { articles } = useArticles();
+
+  const mainNews = articles.slice(0, 3);
+
   return (
     <S.Container>
       <S.Title>🗞️ 주요 뉴스</S.Title>
       <S.NewsList>
-        <S.NewsItem>[노영재] 엄청난엄청난엄청난 회사 입사 성공함</S.NewsItem>
-        <S.NewsItem>[노일재] 본인이 임베디드가 되겠다고 선언해...일파만파</S.NewsItem>
-        <S.NewsItem>[노이재] 노이재, 이렇게 살다가 노이로제</S.NewsItem>
+        {mainNews.length === 0 ? (
+          <S.NewsItem>뉴스를 불러오는 중입니다...</S.NewsItem>
+        ) : (
+          mainNews.map((article, i) => (
+            <S.NewsItem key={i}>
+              [{article.author}] {article.title}
+            </S.NewsItem>
+          ))
+        )}
       </S.NewsList>
     </S.Container>
-  )
-}
+  );
+};
 
-export default MainNews
+export default MainNews;

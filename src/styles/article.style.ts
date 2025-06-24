@@ -30,7 +30,7 @@ export const Grid = styled.div<{ type?: "main" | "latest" }>`
       ? `
     display: flex;
     gap: 20px;
-    height: 100%; // 중요!
+    height: 100%; 
     align-items: stretch;
 
     @media (max-width: 768px) {
@@ -62,3 +62,20 @@ export const VerticalCardList = styled.div`
     margin-bottom: 12px;
   }
 `;
+
+export const ReadMoreButton = styled.button`
+  color: white;
+  background-color: #254ACA;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+
+  &:hover{
+    background-color: #0A467D;
+  }
+`
+
+export const ReadMoreButtonConatiner = styled.div`
+  text-align: center;
+  margin-top: 20px;
+`

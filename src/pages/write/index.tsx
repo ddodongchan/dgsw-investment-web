@@ -87,6 +87,14 @@ function Write() {
           <Panel defaultSize={40} minSize={20}>
             <S.PanelWrapper>
               <S.ArticleTitle>📄 실시간 미리보기</S.ArticleTitle>
+
+              {/* 제목 미리보기 영역 */}
+              <S.TitlePreviewBox>
+                <span>제목</span>
+                <h2>{title || '제목이 여기에 표시됩니다'}</h2>
+              </S.TitlePreviewBox>
+
+              {/* 마크다운 미리보기 영역 */}
               <S.MarkdownPreview>
                 <ReactMarkdown>{markdown}</ReactMarkdown>
               </S.MarkdownPreview>

@@ -107,6 +107,27 @@ export const SubmitButton = styled.button`
   align-self: flex-end;
 `;
 
+export const TitlePreviewBox = styled.div`
+  background-color: #f0f4ff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid #dbeafe;
+
+  span {
+    font-size: 0.9rem;
+    color: #1e3a8a;
+    font-weight: 600;
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    color: #1e40af;
+    font-weight: bold;
+  }
+`;
+
 export const TextArea = styled.textarea`
   flex: 1;
   font-size: 1rem;

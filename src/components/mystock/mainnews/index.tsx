@@ -1,11 +1,22 @@
-import * as S from './mainnews.style'
+import * as S from './mainnews.style';
+import { useArticles } from '@/hooks/useArticles';
 
 const ButtonGroup = () => {
+  const { articles } = useArticles();
+
+  const buttonNews = articles.slice(0, 3);
+
   return (
     <S.Wrapper>
-      <S.Container>[노영재] 엄청나게큰회사함</S.Container>
-      <S.Container>[노영재] 엄청나게큰회사함</S.Container>
-      <S.Container>[노영재] 엄청나게큰회사함</S.Container>
+      {buttonNews.length === 0 ? (
+        <S.Container>뉴스를 불러오는 중입니다...</S.Container>
+      ) : (
+        buttonNews.map((article, i) => (
+          <S.Container key={i}>
+            [{article.author}] {article.title}
+          </S.Container>
+        ))
+      )}
     </S.Wrapper>
   );
 };
