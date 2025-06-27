@@ -5,7 +5,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 20px 80px;
   font-family: "Pretendard", sans-serif;
-  background-color: white;
+  background-color: white
 `;
 
 export const BackButton = styled.button`

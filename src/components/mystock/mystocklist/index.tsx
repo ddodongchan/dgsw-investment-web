@@ -25,7 +25,7 @@ const MyStockList = ({ data, activeIndex, onClickItem }: Props) => {
             </S.StockTitleWrapper>
             <S.SubDetailWrapper>
               <S.StockWeek>{idx + 1}주</S.StockWeek>
-              <S.SubDetail>-22,222(50%)</S.SubDetail>
+              {/* <S.SubDetail>-22,222(50%)</S.SubDetail> */}
             </S.SubDetailWrapper>
           </S.StockDetails>
         </S.TransactionItem>

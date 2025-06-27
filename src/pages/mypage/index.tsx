@@ -1,40 +1,75 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import Header from '@/components/header';
 
+interface News {
+  id: number;
+  title: string;
+  preview: string;
+  priceChange: number;
+  volume: number;
+  date: string;
+  author: string;
+}
+
 const Mypage = () => {
+  const router = useRouter();
+  const [newsList, setNewsList] = useState<News[]>([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const token = localStorage.getItem('access_token');
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/api/news/all`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const fetched = res.data.data; // ✅ 응답 구조에 맞게 수정
+        setNewsList(fetched.slice(0, 4)); // ✅ 4개만 추림
+      } catch (error) {
+        console.error('뉴스 불러오기 실패:', error);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  const handleWriteClick = () => {
+    router.push('/write');
+  };
+
   return (
     <>
-    <Header/>
+      <Header />
       <GlobalStyle />
       <Container>
-      <Sidebar>
-        <SidebarTitle>내 정보</SidebarTitle> 
-        <ProfileCard>
+        <Sidebar>
+          <SidebarTitle>내 정보</SidebarTitle>
+          <ProfileCard>
             <Avatar />
             <UserInfo>
-            <Grade>3학년 5반 1번</Grade>
-            <Name>배채희</Name>
-            <Role>・ 투자자</Role>
+              <Grade>3학년 5반 1번</Grade>
+              <Name>배채희</Name>
+              <Role>・ 투자자</Role>
             </UserInfo>
             <EditButton>정보 수정</EditButton>
-        </ProfileCard>
+            <WriteButton onClick={handleWriteClick}>글 쓰기</WriteButton>
+          </ProfileCard>
         </Sidebar>
 
         <Main>
-          <SectionTitle>최근에 본 뉴스</SectionTitle>
+          <SectionTitle>내가 쓴 뉴스</SectionTitle>
           <NewsList>
-            {Array(4).fill(0).map((_, i) => (
-              <NewsCard key={i}>
-                <NewsTitle>[노영재] 엄청나게 큰회사합격함 ㄷㄷㄷ</NewsTitle>
-                <NewsPreview>
-                  노삼재ㅣㅁㄴㅇㄹㅁㄴㅁㄴㅁㄴㅁㄴㅇㄹㅁㄴㅁㄴㅁㄴㄹ...
-                </NewsPreview>
+            {newsList.map((news) => (
+              <NewsCard key={news.id}>
+                <NewsTitle>{news.title}</NewsTitle>
+                <NewsPreview>{news.preview}</NewsPreview>
                 <NewsFooter>
-                  <PriceUp>▲ 0.3445</PriceUp>
-                  <Volume>2,300</Volume>
-                  <Date>2024.03.11</Date>
-                  <Author>노삼재 기자</Author>
+                  <Date>{news.date}</Date>
                 </NewsFooter>
               </NewsCard>
             ))}
@@ -186,3 +221,17 @@ const PriceUp = styled.span`
 const Volume = styled.span``;
 const Date = styled.span``;
 const Author = styled.span``;
+
+const WriteButton = styled.button`
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1d4ed8;
+  }
+`;

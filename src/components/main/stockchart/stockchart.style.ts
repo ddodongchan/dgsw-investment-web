@@ -84,7 +84,7 @@ export const NoResult = styled.div`
 
 export const ChartBox = styled.div`
   width: 100%;
-  height: 250px;
+  height: 350px;
   background-color: #f5f5f5;
   border-radius: 8px;
   padding: 8px;

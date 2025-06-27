@@ -1,4 +1,4 @@
-import * as S from './stockcard.style';
+import * as S from "./stockcard.style";
 import {
   LineChart,
   Line,
@@ -7,7 +7,9 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-} from 'recharts';
+} from "recharts";
+
+import { dummyStocks } from "@/dummy/dummyStocks";
 
 type Props = {
   name: string;
@@ -15,17 +17,16 @@ type Props = {
   change: string;
 };
 
-// 더미 차트 데이터
-const dummyChartData = [
-  { date: '06-01', price: 21000 },
-  { date: '06-02', price: 21500 },
-  { date: '06-03', price: 21200 },
-  { date: '06-04', price: 21800 },
-  { date: '06-05', price: 22000 },
-  { date: '06-06', price: 22222 },
-];
-
 const StockCard = ({ name, price, change }: Props) => {
+  // 해당 이름의 더미 데이터에서 priceHistory 찾기
+  const stockData = dummyStocks.find((item) => item.name === name);
+
+  const chartData = stockData
+    ? stockData.priceHistory.map((price, idx) => ({
+        price,
+      }))
+    : [];
+
   return (
     <S.Wrapper>
       <S.Title>
@@ -34,11 +35,11 @@ const StockCard = ({ name, price, change }: Props) => {
       </S.Title>
       <S.SubInfo>{change}</S.SubInfo>
 
-      <ResponsiveContainer width="100%" height={200}>
-        <LineChart data={dummyChartData}>
+      <ResponsiveContainer width="100%" height={500}>
+        <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis domain={['dataMin - 1000', 'dataMax + 1000']} />
+          <YAxis domain={["dataMin - 1000", "dataMax + 1000"]} />
           <Tooltip />
           <Line
             type="monotone"

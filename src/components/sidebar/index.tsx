@@ -7,7 +7,7 @@ import { Home, FileText, BarChart2 } from 'lucide-react'
 
 const Sidebar = () => {
   const router = useRouter()
-  const username = '세세뇽'
+  const username = '배채희'
 
   const menuItems = [
     { label: '홈', icon: <Home />, path: '/main' },

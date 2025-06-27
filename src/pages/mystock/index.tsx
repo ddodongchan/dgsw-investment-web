@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import Daily from "@/components/daily";
 import ButtonGroup from "@/components/mystock/mainnews/index";
@@ -6,53 +6,55 @@ import StockCard from "@/components/mystock/stockcard/index";
 import InfoCard from "@/components/mystock/infocard/index";
 import MyStockList from "@/components/mystock/mystocklist/index";
 
+import { dummyStocks } from "@/dummy/dummyStocks";  // 경로는 실제 위치에 맞게 조정하세요
 import * as S from "../../styles/mystock.style";
 
-const stockData = [
-  {
-    name: "노영재",
-    price: "22,222뇽",
-    change: "+200뇽 (0.2%)",
-    info: {
-      yield: "+2.23%",
-      totalAmount: "22,222뇽",
-      quantity: "200주",
-      avgPrice: "64,000뇽",
-      totalBuy: "10.000020030",
-      totalSell: "10.2334243"
-    }
-  },
-  {
-    name: "배채희",
-    price: "11,111뇽",
-    change: "-300뇽 (-1.5%)",
-    info: {
-      yield: "-3.12%",
-      totalAmount: "15,000뇽",
-      quantity: "100주",
-      avgPrice: "65,000뇽",
-      totalBuy: "5.00",
-      totalSell: "3.50"
-    }
-  },
-  {
-    name: "문진위",
-    price: "33,333뇽",
-    change: "+1000뇽 (3%)",
-    info: {
-      yield: "+5.00%",
-      totalAmount: "33,333뇽",
-      quantity: "300주",
-      avgPrice: "55,000뇽",
-      totalBuy: "15.00",
-      totalSell: "16.50"
-    }
-  },
-];
+type StockInfo = {
+  yield: string;
+  totalAmount: string;
+  quantity: string;
+  avgPrice: string;
+  totalBuy?: string;
+  totalSell?: string;
+};
+
+type StockData = {
+  name: string;
+  price: string;
+  change: string;
+  info?: StockInfo;
+};
 
 const Mystock = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [stockData, setStockData] = useState<StockData[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    // 실제 API 요청 대신 더미 데이터를 셋팅
+    const formattedData = dummyStocks.map((item) => ({
+      name: item.name,
+      price: item.currentPrice.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+      change: `${item.change >= 0 ? "+" : ""}${item.change.toFixed(2)}%`,
+      info: {
+        yield: item.yield,
+        totalAmount: item.totalAmount,
+        quantity: item.quantity.toString(),
+        avgPrice: item.avgPrice.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+      },
+    }));
+    setStockData(formattedData);
+    setSelectedIndex(0);
+  }, []);
+
+  if (stockData.length === 0) return <div>Loading...</div>;
+
   const selectedStock = stockData[selectedIndex];
+  const stockInfo = selectedStock.info ?? {
+    yield: "-",
+    totalAmount: "-",
+    quantity: "-",
+    avgPrice: "-",
+  };
 
   return (
     <S.Wrapper>
@@ -66,9 +68,9 @@ const Mystock = () => {
             price={selectedStock.price}
             change={selectedStock.change}
           />
-          <InfoCard info={selectedStock.info} />
+          <InfoCard info={stockInfo} />
           <MyStockList
-            data={stockData}
+            data={stockData.map(({ name, price }) => ({ name, price }))}
             activeIndex={selectedIndex}
             onClickItem={setSelectedIndex}
           />

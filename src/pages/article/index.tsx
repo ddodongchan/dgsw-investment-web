@@ -17,7 +17,7 @@ const ArticlePage = () => {
                 <S.SectionTitle>📌 주요 뉴스</S.SectionTitle>
                 <S.Grid type="main" style={{ height: "400px" }}>
                   <div style={{ flex: 1 }}>
-                    {articles[0] && <ArticleCard article={articles[0]} />}
+                  {articles[0] && <ArticleCard article={articles[0]} isLarge />}
                   </div>
 
                   <S.VerticalCardList>

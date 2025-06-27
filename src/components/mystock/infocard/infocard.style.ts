@@ -13,14 +13,19 @@ export const Wrapper = styled.div`
 `;
 
 export const InfoItem = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-size: 16px;
+  font-weight: 500;
 `;
 
 export const RedText = styled.span`
-  color: red;
-  font-weight: bold;
+  color: #e74c3c;
+  font-weight: 700;
 `;
 
 export const Strong = styled.span`
-  font-weight: bold;
+  color: #e10600;
+  font-weight: 800;
+  font-size: 20px;
 `;

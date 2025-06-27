@@ -69,9 +69,24 @@ const ArticleDetail = () => {
     router.back(); 
   };
 
+  // 날짜 포맷팅 함수
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "";
+    return new Date(dateStr).toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  };
+
   return (
-    <div style={{ backgroundColor: 'white', minHeight: '100vh' }}>
-      <Header />
+    <div style={{ backgroundColor: 'white', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+    <Header />
+    <div style={{ backgroundColor: '#ddd', minHeight: '100vh' }}>
+      {/* <Header /> */}
       <S.Container>
         <S.BackButton onClick={handleBack}>← 뒤로가기</S.BackButton>
 
@@ -80,7 +95,7 @@ const ArticleDetail = () => {
             <S.Category>DGSW</S.Category>
             <S.Title>{article.title}</S.Title>
             <S.Meta>
-              {article.author} 기자 ・ {article.date}
+              {article.author} 기자 ・ {formatDate(article.date)}
             </S.Meta>
             <S.Divider />
             {/* 마크다운 렌더링 */}
@@ -92,6 +107,7 @@ const ArticleDetail = () => {
           <p>기사를 불러오는 중입니다...</p>
         )}
       </S.Container>
+    </div>
     </div>
   );
 };

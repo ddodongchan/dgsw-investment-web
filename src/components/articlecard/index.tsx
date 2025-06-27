@@ -11,29 +11,26 @@ export interface Article {
   price: string;
 }
 
-const ArticleCard = ({ article }: { article: Article }) => {
+const ArticleCard = ({ article, isLarge = false }: { article: Article; isLarge?: boolean }) => {
   const router = useRouter();
-  const { title, summary, date, author, rate, price } = article;
+  const { title, summary, date, author } = article;
 
   const handleClick = () => {
-    // 여기선 title을 URL로 단순 변환해 사용
     router.push(`/article/${encodeURIComponent(title)}`);
   };
 
-  const rateValue = parseFloat(rate);
-  const isPositive = rateValue >= 0;
+  const formattedDate = date.slice(0, 16).replace('T', ' ');
 
   return (
-    <S.Card onClick={handleClick}>
-      <S.Title>{title}</S.Title>
-      <S.Summary>{summary}</S.Summary>
-      <S.Info>
-        <span>{date}</span>
+    <S.Card onClick={handleClick} $isLarge={isLarge}>
+      <S.CardContent>
+        <S.Title>{title}</S.Title>
+        <S.Summary $isLarge={isLarge}>{summary}</S.Summary>
+      </S.CardContent>
+      <S.InfoBottom>
+        <span>{formattedDate}</span>
         <span>{author}</span>
-      </S.Info>
-      <S.RatePrice isPositive={isPositive}>
-        {isPositive ? "▲" : "▼"} {Math.abs(rateValue)} &nbsp;&nbsp; {price}
-      </S.RatePrice>
+      </S.InfoBottom>
     </S.Card>
   );
 };

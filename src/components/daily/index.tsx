@@ -34,7 +34,7 @@ export default function Daily() {
     <S.Container>
       <S.GreetingContainer>
         <S.Greeting>
-            <S.UserName>세세뇽</S.UserName>님 {getGreeting()} 
+            <S.UserName>배채희</S.UserName>님 {getGreeting()} 
         </S.Greeting>
         <S.Time>{formattedTime} 기준</S.Time>
         </S.GreetingContainer>
